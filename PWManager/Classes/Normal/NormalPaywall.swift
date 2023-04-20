@@ -22,7 +22,7 @@ extension PWManager {
         ///恢复的回调
         private(set) var restoreHandle: ((_ complete: CallbackType) -> Void)?
         ///页面消失的回调
-        private(set) var dismissHandle: (() -> Void)?
+        private(set) var dismissHandle: ((_ clickClose: Bool) -> Void)?
         
         ///购买
         public func buy(_ handler: ((_ product: ProductType, _ complete: CallbackType) -> Void)?) -> Self {
@@ -37,7 +37,7 @@ extension PWManager {
         }
         
         ///页面消失
-        public func dismiss(_ handler: (() -> Void)?) -> Self {
+        public func dismiss(_ handler: ((_ clickClose: Bool) -> Void)?) -> Self {
             self.dismissHandle = handler
             return self
         }

@@ -47,12 +47,13 @@ extension PWManager {
         }
         
         ///购买操作，所有子类统一调用此方法进行购买不要自己实现
-        public final func paywallActionBuy(productID: PaywallModel.ProductType) {
+        public final func paywallActionBuy(product: PaywallModel.ProductType) {
             self.vc?.loading = true
-            myModel?.buyHandle?(productID) { [weak self] suc in
+            myModel?.buyHandle?(product) { [weak self] suc in
                 self?.vc?.loading = false
                 if suc {
                     self?.vc?.back()
+                    self?.myModel?.dismissHandle?(false)
                 }
             }
         }
@@ -64,6 +65,7 @@ extension PWManager {
                 self?.vc?.loading = false
                 if suc {
                     self?.vc?.back()
+                    self?.myModel?.dismissHandle?(false)
                 }
             }
         }
@@ -71,7 +73,7 @@ extension PWManager {
         ///关闭动作
         public final func paywallActionClose() {
             vc?.back()
-            myModel?.dismissHandle?()
+            myModel?.dismissHandle?(true)
         }
     }
 }

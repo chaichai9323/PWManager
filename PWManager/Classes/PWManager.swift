@@ -10,6 +10,37 @@ import UIKit
 
 //MARK: - Model
 public class PWManager {
+    
+    ///内购产品模型
+    public struct ProductModel: Equatable {
+        
+        public static func == (lhs: Self, rhs: Self) -> Bool {
+            return lhs.productIdentifier == rhs.productIdentifier
+        }
+        
+        public enum Period {
+            case week
+            case month
+            case quarter
+            case year
+        }
+        ///产品ID
+        let productIdentifier: String
+        ///产品周期
+        let unit: Period
+        ///价格
+        let price: Double
+        ///价格符号
+        let priceSymbol: String
+        
+        public init(productIdentifier: String, unit: Period, price: Double, priceSymbol: String = "$") {
+            self.productIdentifier = productIdentifier
+            self.unit = unit
+            self.price = price
+            self.priceSymbol = priceSymbol
+        }
+    }
+    
     ///Products模型
     public class PaywallModel {
         
@@ -17,7 +48,7 @@ public class PWManager {
             print("\(String(describing: type(of: self))) dealloc")
         }
         
-        public typealias ProductType = Any
+        public typealias ProductType = ProductModel
         ///设计样式。比如 iq9du
         let design: String
         ///产品列表

@@ -47,18 +47,17 @@ extension PWManager {
         }
         
         ///购买操作，所有子类统一调用此方法进行购买不要自己实现
-        public final func paywallActionBuy(productID: PaywallModel.ProductType) {
-            guard let products = myModel?.productIDS, let pid = productID as? String else { return }
-            guard let index = products.firstIndex(where: { $0 == pid }) else { return }
+        public final func paywallActionBuy(product: PaywallModel.ProductType) {
             vc?.loading = true
             IAPManager.shared.purchase(
                 designId: dataModel.design,
                 paywallSource: .other(name: dataModel.source),
-                productID: products[index]) { [weak self] result in
+                productID: product.productIdentifier) { [weak self] result in
                     self?.vc?.loading = false
                     self?.myModel?.buyHandle?(result)
                     if result.isActive {
                         self?.vc?.back()
+                        self?.myModel?.dismissHandle?(false)
                     }
                 }
         }
@@ -71,6 +70,7 @@ extension PWManager {
                 self?.myModel?.restoreHandle?(result)
                 if result.isActive {
                     self?.vc?.back()
+                    self?.myModel?.dismissHandle?(false)
                 }
             }
         }
@@ -79,7 +79,7 @@ extension PWManager {
         public final func paywallActionClose() {
             vc?.back()
             myModel?.sendEvent(type: .paywall_closed)
-            myModel?.dismissHandle?()
+            myModel?.dismissHandle?(true)
         }
     }
 }

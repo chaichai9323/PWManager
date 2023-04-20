@@ -24,10 +24,10 @@ extension PWManager {
         ///恢复的回调
         private(set) var restoreHandle: ((_ result: PurchaseResult) -> Void)?
         ///页面消失的回调
-        private(set) var dismissHandle: (() -> Void)?
+        private(set) var dismissHandle: ((_ clickClose: Bool) -> Void)?
         
-        var productIDS: [String] {
-            guard let res = products as? [String] else { return [] }
+        var _rcProductIDS: [String] {
+            let res = products.map{ $0.productIdentifier }
             return res
         }
         
@@ -44,7 +44,7 @@ extension PWManager {
         }
         
         ///页面消失
-        public func dismiss(_ handler: (() -> Void)?) -> Self {
+        public func dismiss(_ handler: ((_ clickClose: Bool) -> Void)?) -> Self {
             self.dismissHandle = handler
             return self
         }
@@ -53,7 +53,7 @@ extension PWManager {
         func sendEvent(type: FIREvents.IAPManager_Revenue) {
             IAPManager.shared.sendPaywallTrigerEvent(
                 designId: design,
-                productIDs: productIDS,
+                productIDs: _rcProductIDS,
                 paywallSource: .other(name: source),
                 eventsType: type
             )

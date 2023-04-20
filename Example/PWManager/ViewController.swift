@@ -23,9 +23,11 @@ class ViewController: UIViewController {
 
     
     @IBAction func click() {
+        let p = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99)
+        
         PWManager.config(
             design: "x13",
-            products: ["com.abc.year"],
+            products: [p],
             source: "onboarding",
             ui: OnboardingView.self
 //        )
@@ -44,8 +46,8 @@ class ViewController: UIViewController {
 //                result?(false)
 //            }
 //            print("恢复" + (result.isActive ? "成功" : "失败"))
-        }.dismiss {
-            print("关闭")
+        }.dismiss { clickClose in
+            print("\(clickClose ? "手动点击" : "")关闭")
         }.present(in: self)
     }
  
@@ -68,7 +70,7 @@ class ViewController: UIViewController {
             let products = products
             
             switch sender.tag {
-            case 0: paywallActionBuy(productID: products[0])
+            case 0: paywallActionBuy(product: products[0])
             case 1: paywallActionRestore()
             case 2: paywallActionClose()
             default: break
