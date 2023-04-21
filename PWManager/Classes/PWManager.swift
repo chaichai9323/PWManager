@@ -32,6 +32,8 @@ public class PWManager {
         let price: Double
         ///价格符号
         let priceSymbol: String
+        ///附加数据可以供外部捕获传入的元数据
+        public var extraData: Any?
         
         public init(productIdentifier: String, unit: Period, price: Double, priceSymbol: String = "$") {
             self.productIdentifier = productIdentifier
@@ -59,6 +61,8 @@ public class PWManager {
         let viewType: PaywallView.Type
         /// 是否需要动画
         fileprivate let animate: Bool
+        ///语言环境 比如 [en, es-MX, nl, de]
+        fileprivate var language: String?
         ///预留附加信息
         private(set) var extraData: Any?
         
@@ -75,6 +79,14 @@ public class PWManager {
         /// - Returns: 当前对象
         public func addExtraData(_ data: Any) -> Self {
             extraData = data
+            return self
+        }
+        
+        /// 切换语言环境, 可选实现，默认是跟随系统语言环境
+        /// - Parameter language: 指定的语言比如 [en, es-MX, nl, de ...]
+        /// - Returns: 当前对象
+        public func switchLanguage(language: String) -> Self {
+            self.language = language
             return self
         }
         
@@ -107,7 +119,7 @@ public class PWManager {
             case push
             case present(modal: UIModalPresentationStyle)
         }
-        ///是否需要动画
+        ///是否需要弹出动画
         public var animate: Bool = true
         ///展示的方式
         public var showStyle: Style = .present(modal: .fullScreen)
@@ -198,3 +210,34 @@ extension PWManager {
     }
 }
 
+extension PWManager.PaywallView {
+    
+    var resBundle: Bundle? {
+        let clsName = String(describing: type(of: self))
+        guard let start = clsName.firstIndex(of: "_") else { return nil }
+        let paywallID = clsName[start ..< clsName.endIndex]
+        guard let path = Bundle.main.path(forResource: "PWManager\(String(paywallID))", ofType: "bundle") else {
+            return nil
+        }
+        
+        return Bundle(path: path)
+    }
+    
+    func filePath(name: String) -> String? {
+        return resBundle?.path(forResource: name, ofType: nil)
+    }
+    
+    func image(named name: String) -> UIImage? {
+        return UIImage(named: name, in: resBundle, compatibleWith: nil)
+    }
+    
+    func localString(_ string: String) -> String {
+        guard let moduleBundle = resBundle else { return string }
+        guard let language = dataModel.language,
+              let path = moduleBundle.path(forResource: language, ofType: "lproj"),
+              let specifyBundle = Bundle(path: path) else {
+            return NSLocalizedString(string, tableName: nil, bundle: moduleBundle, value: "", comment: "")
+        }
+        return NSLocalizedString(string, tableName: nil, bundle: specifyBundle, value: "", comment: "")
+    }
+}

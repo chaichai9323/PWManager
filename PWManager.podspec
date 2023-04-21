@@ -33,28 +33,38 @@ TODO: Add long description of the pod here.
 
   dir = ''
   if ENV['PWManager_LocalPath'] == 'true'
-    dir = 'PWManager/Classes'
+    dir = 'PWManager'
   else
-    dir = 'PWManager/PWManager/Classes'
+    dir = 'PWManager/PWManager'
   end
   
-  s.source_files = "#{dir}/*.swift"
-  
   s.subspec 'normal' do | normal |
-    normal.source_files = "#{dir}/Normal/**/*", "#{dir}/*.swift"
+    normal.source_files = "#{dir}/Classes/Normal/**/*", "#{dir}/Classes/*.swift"
   end
   
   s.subspec 'rc' do | rc |
-    rc.source_files = "#{dir}/RC/**/*"
-    rc.dependency 'IAPManager', '~> 11.0.18'
+    rc.source_files = "#{dir}/Classes/RC/**/*", "#{dir}/Classes/*.swift"
+    rc.dependency 'IAPManager', '~> 11.0.19'
+  end
+  
+  s.subspec 'u8enjsbh' do | view |
+    arr = view.name.split('/')
+    paywallid = arr[arr.count - 1]
+    view.source_files = "#{dir}/Classes/Paywalls/*_#{paywallid}.swift"
+    view.resource_bundles = {
+      "#{s.name}_#{paywallid}" => ["#{dir}/Assets/#{paywallid}/*"]
+    }
+    view.dependency 'SnapKit'
+  end
+  s.subspec 'template' do | view |
+    arr = view.name.split('/')
+    paywallid = arr[arr.count - 1]
+    view.source_files = "#{dir}/Classes/Paywalls/*_#{paywallid}.swift"
+    view.resource_bundles = {
+      "#{s.name}_#{paywallid}" => ["#{dir}/Assets/#{paywallid}/*"]
+    }
+    view.dependency 'SnapKit'
   end
   
   s.default_subspec = 'rc'
-  # s.resource_bundles = {
-  #   'PWManager' => ['PWManager/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

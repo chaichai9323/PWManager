@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        view.backgroundColor = UIColor(named: "main")
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,59 +24,28 @@ class ViewController: UIViewController {
 
     
     @IBAction func click() {
-        let p = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99)
+        let p1 = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99)
+        let p2 = PWManager.ProductModel(productIdentifier: "com.sub.month", unit: .month, price: 9.99)
         
         PWManager.config(
             design: "x13",
-            products: [p],
+            products: [p1, p2],
             source: "onboarding",
-            ui: OnboardingView.self
-//        )
-//        PWManager.config(
-//            RCPaywall: "x13",
-//            products: ["com.abc.year"],
-//            source: "onboarding",
-//            ui: OnboardingView.self
-        ).addExtraData("abc").buy { /*pid ,*/result in
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-//                result?(true)
-//            }
-//            print("购买" + (result.isActive ? "成功" : "失败"))
+            ui: PWManager.Paywall_u8enjsbh.self
+        )
+        .switchLanguage(language: "de")
+        .addExtraData("abc")
+        .buy { pid ,result in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                result?(true)
+            }
         }.restore { result in
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-//                result?(false)
-//            }
-//            print("恢复" + (result.isActive ? "成功" : "失败"))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                result?(false)
+            }
         }.dismiss { clickClose in
             print("\(clickClose ? "手动点击" : "")关闭")
         }.present(in: self)
-    }
- 
-    class OnboardingView: PWManager.PaywallView {
-        override func setupUI() {
-            super.setupUI()
-            backgroundColor = .brown
-            
-            for (i, str) in ["购买","恢复","关闭"].enumerated() {
-                let btn = UIButton(frame: .init(origin: .init(x: 100, y: 100 + 70 * i), size: .init(width: 60, height: 45)))
-                btn.backgroundColor = .red
-                btn.setTitle(str, for: .normal)
-                addSubview(btn)
-                btn.tag = i
-                btn.addTarget(self, action: #selector(click(sender:)), for: .touchUpInside)
-            }
-        }
-        @objc func click(sender: UIButton) {
-            //所有产品列表
-            let products = products
-            
-            switch sender.tag {
-            case 0: paywallActionBuy(product: products[0])
-            case 1: paywallActionRestore()
-            case 2: paywallActionClose()
-            default: break
-            }
-        }
     }
 }
 

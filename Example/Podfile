@@ -8,8 +8,9 @@ ENV['PWManager_LocalPath'] = 'true'
 platform :ios, '13.0'
 
 target 'PWManager_Example' do
-  pod 'PWManager', :path => '../'
-
+  pod 'PWManager/normal', :path => '../'
+  pod 'PWManager/u8enjsbh', :path => '../'
+  pod 'PWManager/template', :path => '../'
   target 'PWManager_Tests' do
     inherit! :search_paths
 
