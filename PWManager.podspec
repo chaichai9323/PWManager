@@ -38,33 +38,33 @@ TODO: Add long description of the pod here.
     dir = 'PWManager/PWManager'
   end
   
-  s.subspec 'normal' do | normal |
+  s.subspec "normal" do | normal |
     normal.source_files = "#{dir}/Classes/Normal/**/*", "#{dir}/Classes/*.swift"
   end
   
-  s.subspec 'rc' do | rc |
+  s.subspec "rc" do | rc |
     rc.source_files = "#{dir}/Classes/RC/**/*", "#{dir}/Classes/*.swift"
     rc.dependency 'IAPManager', '~> 11.0.19'
   end
   
-  s.subspec 'u8enjsbh' do | view |
-    arr = view.name.split('/')
+  s.subspec "u8enjsbh" do | view |
+    arr = view.name.split("/")
     paywallid = arr[arr.count - 1]
     view.source_files = "#{dir}/Classes/Paywalls/*_#{paywallid}.swift"
     view.resource_bundles = {
       "#{s.name}_#{paywallid}" => ["#{dir}/Assets/#{paywallid}/*"]
     }
-    view.dependency 'SnapKit'
+    view.dependency "SnapKit"
   end
-  s.subspec 'template' do | view |
-    arr = view.name.split('/')
+  s.subspec "template" do | view |
+    arr = view.name.split("/")
     paywallid = arr[arr.count - 1]
     view.source_files = "#{dir}/Classes/Paywalls/*_#{paywallid}.swift"
     view.resource_bundles = {
       "#{s.name}_#{paywallid}" => ["#{dir}/Assets/#{paywallid}/*"]
     }
-    view.dependency 'SnapKit'
+    view.dependency "SnapKit"
   end
   
-  s.default_subspec = 'rc'
+  s.default_subspec = "rc"
 end
