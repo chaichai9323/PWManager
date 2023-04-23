@@ -32,13 +32,16 @@ public class PWManager {
         let price: Double
         ///价格符号
         let priceSymbol: String
+        ///免费天数
+        let freeTrialDays: Int
         ///附加数据可以供外部捕获传入的元数据
         public var extraData: Any?
         
-        public init(productIdentifier: String, unit: Period, price: Double, priceSymbol: String = "$") {
+        public init(productIdentifier: String, unit: Period, price: Double, freeTrialDays: Int = 7, priceSymbol: String = "$") {
             self.productIdentifier = productIdentifier
             self.unit = unit
             self.price = price
+            self.freeTrialDays = freeTrialDays
             self.priceSymbol = priceSymbol
         }
     }
