@@ -38,5 +38,10 @@ extension PWManager {
         @objc func close() {
             paywallActionClose()
         }
+        
+        ///自定义操作
+        @objc func customAction() {
+            paywallHandleCustomAction(param: "自定义参数")
+        }
     }
 }

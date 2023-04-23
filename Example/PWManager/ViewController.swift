@@ -35,6 +35,9 @@ class ViewController: UIViewController {
         )
         .switchLanguage(language: "de")
         .addExtraData("abc")
+        .customAction{ obj in
+            print(obj)
+        }
         .buy { pid ,result in
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                 result?(true)

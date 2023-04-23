@@ -72,6 +72,19 @@ extension PWManager {
                 make.left.equalToSuperview().offset(20)
                 make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
             }
+            
+            let btn2 = UIButton(type: .infoDark)
+            btn2.addTarget(self, action: #selector(customAction), for: .touchUpInside)
+            addSubview(btn2)
+            btn2.snp.makeConstraints { make in
+                make.size.equalTo(40)
+                make.right.equalToSuperview().offset(-20)
+                make.top.equalTo(btn)
+            }
+        }
+        
+        @objc func customAction() {
+            self.paywallHandleCustomAction(param: "自定义参数")
         }
         
         @objc func buy(_ ges: UITapGestureRecognizer) {

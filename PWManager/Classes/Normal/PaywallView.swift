@@ -70,6 +70,11 @@ extension PWManager {
             }
         }
         
+        ///自定义操作
+        public final func paywallHandleCustomAction(param: Any) {
+            dataModel.customHandle?(param)
+        }
+        
         ///关闭动作
         public final func paywallActionClose() {
             vc?.back()

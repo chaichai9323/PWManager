@@ -65,6 +65,8 @@ public class PWManager {
         fileprivate var language: String?
         ///预留附加信息
         private(set) var extraData: Any?
+        ///预留的自定义操作
+        fileprivate(set) var customHandle: ((Any) -> Void)?
         
         init(design: String, products: [ProductType], source: String, ui: PaywallView.Type, animate: Bool = true) {
             self.design = design
@@ -87,6 +89,15 @@ public class PWManager {
         /// - Returns: 当前对象
         public func switchLanguage(language: String) -> Self {
             self.language = language
+            return self
+        }
+        
+        
+        /// 预留的自定义操作
+        /// - Parameter callback: 需要外部处理的操作
+        /// - Returns: 当前对象
+        public func customAction(_ callback: ((Any) -> Void)?) -> Self {
+            self.customHandle = callback
             return self
         }
         
