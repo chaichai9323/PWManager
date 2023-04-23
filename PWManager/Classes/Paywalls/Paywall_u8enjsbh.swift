@@ -23,7 +23,7 @@ extension PWManager {
         private func loadDemoTitle() {
             let lab = UILabel()
             lab.textColor = .red
-            lab.font = .boldSystemFont(ofSize: 22)
+            lab.font = self.font(fontName: "Poppins-SemiBoldItalic", fontSize: 22)
             lab.text = "Demo"
             addSubview(lab)
             lab.snp.makeConstraints { make in
@@ -49,7 +49,8 @@ extension PWManager {
                 
                 let weekPrice = String(format: "\(p.priceSymbol)%.2f", p.price / num)
                 
-                lab.text = "\(p.priceSymbol)\(p.price)" + "   " + weekPrice + "/" + localString("txt-351")
+                lab.font = self.font(fontName: "Poppins-Regular", fontSize: 16)
+                lab.text = "\(p.priceSymbol)\(p.price)" + "   " + weekPrice + "/" + self.localString("txt-351")
                 
                 addSubview(lab)
                 lab.snp.makeConstraints { make in

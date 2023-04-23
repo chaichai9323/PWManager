@@ -63,10 +63,12 @@ public class PWManager {
         fileprivate let animate: Bool
         ///语言环境 比如 [en, es-MX, nl, de]
         fileprivate var language: String?
+        ///字体设置
+        private(set) var fontConfig: ((_ name: String, _ size: CGFloat) -> UIFont?)?
         ///预留附加信息
         private(set) var extraData: Any?
         ///预留的自定义操作
-        fileprivate(set) var customHandle: ((Any) -> Void)?
+        private(set) var customHandle: ((Any) -> Void)?
         
         init(design: String, products: [ProductType], source: String, ui: PaywallView.Type, animate: Bool = true) {
             self.design = design
@@ -92,6 +94,14 @@ public class PWManager {
             return self
         }
         
+        
+        /// paywall ui里边需要的字体
+        /// - Parameter font: 获取对应字体的闭包  (字体名字,字体大小) -> 字体
+        /// - Returns: 当前对象
+        public func textFont(_ font: ((_ name: String, _ size: CGFloat) -> UIFont?)?) -> Self {
+            self.fontConfig = font
+            return self
+        }
         
         /// 预留的自定义操作
         /// - Parameter callback: 需要外部处理的操作
@@ -250,5 +260,12 @@ extension PWManager.PaywallView {
             return NSLocalizedString(string, tableName: nil, bundle: moduleBundle, value: "", comment: "")
         }
         return NSLocalizedString(string, tableName: nil, bundle: specifyBundle, value: "", comment: "")
+    }
+    
+    func font(fontName: String, fontSize: CGFloat) -> UIFont {
+        guard let fnt = dataModel.fontConfig?(fontName, fontSize) else {
+            return UIFont.systemFont(ofSize: fontSize)
+        }
+        return fnt
     }
 }

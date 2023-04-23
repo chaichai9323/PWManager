@@ -34,6 +34,9 @@ class ViewController: UIViewController {
             ui: PWManager.Paywall_u8enjsbh.self
         )
         .switchLanguage(language: "de")
+        .textFont{ name, size in
+            return UIFont(name: name, size: size)
+        }
         .addExtraData("abc")
         .customAction{ obj in
             print(obj)
