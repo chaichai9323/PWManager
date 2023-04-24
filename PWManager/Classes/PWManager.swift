@@ -314,14 +314,12 @@ extension PWManager.PaywallView {
     
     var R: Resources {
         guard let b = resBundle else { return Resources(bundle: .main, language: nil) }
-        return Resources(bundle: b, language: dataModel.language)
+        return Resources(bundle: b, language: dataModel.language, font: dataModel.fontConfig)
     }
     
     fileprivate var resBundle: Bundle? {
         let clsName = String(describing: type(of: self))
-        guard let start = clsName.firstIndex(of: "_") else { return nil }
-        let paywallID = clsName[start ..< clsName.endIndex]
-        guard let path = Bundle.main.path(forResource: "PWManager\(String(paywallID))", ofType: "bundle") else {
+        guard let path = Bundle.main.path(forResource: "PWManager_\(String(clsName))", ofType: "bundle") else {
             return nil
         }
         
