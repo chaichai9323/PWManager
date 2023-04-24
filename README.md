@@ -32,7 +32,7 @@ pod 'PWManager/OOG104/sample001', '~> 16.0.0'
 
 ```
 ## 使用方法
-
+```ruby
 在需要展示paywall的地方调用以下方法：
 let p1 = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99, freeTrialDays: 7,priceSymbol: "$")
 let p2 = PWManager.ProductModel(productIdentifier: "com.sub.month", unit: .month, price: 9.99, freeTrialDays: 7,priceSymbol: "$")
@@ -88,15 +88,17 @@ PWManager.config(
 }.dismiss { clickClose in
     print("\(clickClose ? "手动点击" : "")关闭")
 }.present(in: self)
+```
 
 ## 开发Paywall的注意事项
+```ruby
 【 所有的paywall需在本pod库完成，在需要使用paywall的项目中使用pod的方式集成。强烈推荐在本pod库中完成paywall的设计！！！ 】
  1.获取图片资源方法: R.image(named: xx)
  2.获取文本本地化方法: R.string(str)
  3.获取资源路径方法: R.filePath(file)
  4.获取字体的方法: R.font("Poppins-Regular", fontSize: 20)
  5.获取产品列表方法: self.products
-
+```
 ## Author
 
 chaichai9323, chailintao@laien.io
