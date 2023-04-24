@@ -37,6 +37,14 @@ public class PWManager {
         ///附加数据可以供外部捕获传入的元数据
         public var extraData: Any?
         
+        
+        /// 创建产品
+        /// - Parameters:
+        ///   - productIdentifier: 产品id, 比如 com.abc.yearly
+        ///   - unit: 周期, 比如年订阅->year, 月订阅->month等等
+        ///   - price: 价格, 比如 35.99等等
+        ///   - freeTrialDays: 免费使用的天数
+        ///   - priceSymbol: 货币符号,比如 $,￥...
         public init(productIdentifier: String, unit: Period, price: Double, freeTrialDays: Int = 7, priceSymbol: String = "$") {
             self.productIdentifier = productIdentifier
             self.unit = unit
