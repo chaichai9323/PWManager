@@ -31,9 +31,9 @@ class ViewController: UIViewController {
             design: "x13",
             products: [p1, p2],
             source: "onboarding",
-            ui: PWManager.Paywall_u8enjsbh.self
+            ui: PWManager.Paywall_template.self
         )
-        .switchLanguage(language: "de")
+//        .switchLanguage(language: "de")
         .textFont{ name, size in
             return UIFont(name: name, size: size)
         }

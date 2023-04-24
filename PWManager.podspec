@@ -47,15 +47,6 @@ TODO: Add long description of the pod here.
     rc.dependency 'IAPManager', '~> 11.0.19'
   end
   
-  s.subspec "u8enjsbh" do | view |
-    arr = view.name.split("/")
-    paywallid = arr[arr.count - 1]
-    view.source_files = "#{dir}/Classes/Paywalls/*_#{paywallid}.swift"
-    view.resource_bundles = {
-      "#{s.name}_#{paywallid}" => ["#{dir}/Assets/#{paywallid}/*"]
-    }
-    view.dependency "SnapKit"
-  end
   s.subspec "template" do | view |
     arr = view.name.split("/")
     paywallid = arr[arr.count - 1]
@@ -64,7 +55,26 @@ TODO: Add long description of the pod here.
       "#{s.name}_#{paywallid}" => ["#{dir}/Assets/#{paywallid}/*"]
     }
     view.dependency "SnapKit"
+    view.dependency "Components", "~> 0.1.0"
   end
+  
+#  s.subspec "OOG101" do | proj |
+#    subdir = proj.name.split("/")[1]
+#    Dir.entries("#{dir}/Assets/#{subdir}").each do | dirname |
+#      if dirname =~ /\A\w/
+#        proj.subspec dirname do | view |
+#          tmparr = view.name.split("/")
+#          paywallid = tmparr[tmparr.count - 1]
+#          view.source_files = "#{dir}/Classes/Paywalls/#{subdir}/*_#{paywallid}.swift"
+#          view.resource_bundles = {
+#            "#{s.name}_#{subdir}_#{paywallid}" => ["#{dir}/Assets/#{subdir}/#{paywallid}/*"]
+#          }
+#          view.dependency "SnapKit"
+#          view.dependency "Components", "~> 0.1.0"
+#        end
+#      end
+#    end
+#  end
   
   s.default_subspec = "rc"
 end

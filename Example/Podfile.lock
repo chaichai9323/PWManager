@@ -1,28 +1,30 @@
 PODS:
+  - Components (0.1.9.6)
   - PWManager/normal (12.0.0)
   - PWManager/template (12.0.0):
-    - SnapKit
-  - PWManager/u8enjsbh (12.0.0):
+    - Components (~> 0.1.0)
     - SnapKit
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - PWManager/normal (from `../`)
   - PWManager/template (from `../`)
-  - PWManager/u8enjsbh (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - SnapKit
+  https://github.com/retro-labs/specs-ios-swift.git:
+    - Components
 
 EXTERNAL SOURCES:
   PWManager:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PWManager: 21df25e2831bbc0455b14f0057dc0397fd6fa9da
+  Components: 078249ee839bbd2d72869049c007419c3114d023
+  PWManager: a46f2e1c7f3c7fe2f4e34aa19881cadf75773eb6
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: cc7211bc506de61f8c89746e9d30d92c9df29eef
+PODFILE CHECKSUM: a32942e5f9aaf07b84f9aa186b6b11c8e51953f5
 
 COCOAPODS: 1.11.3

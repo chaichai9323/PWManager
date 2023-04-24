@@ -236,7 +236,80 @@ extension PWManager {
 
 extension PWManager.PaywallView {
     
-    var resBundle: Bundle? {
+    struct Resources {
+        let bundle: Bundle
+        let language: String?
+        
+        private var font: ((_ name: String, _ size: CGFloat) -> UIFont?)?
+        
+        init(bundle: Bundle, language: String?, font: ((_: String, _: CGFloat) -> UIFont?)? = nil) {
+            self.bundle = bundle
+            self.language = language
+            self.font = font
+        }
+        
+        private var allLanguages: [String] {
+            let all = bundle.localizations
+            return all
+        }
+        
+        private var specifyBundle: Bundle? {
+            guard let lan = language,
+                  let path = bundle.path(forResource: lan, ofType: "lproj"),
+                  let b = Bundle(path: path) else {
+                return nil
+            }
+            return b
+        }
+        
+        private var localBundle: Bundle? {
+            if let b = specifyBundle {
+                return b
+            }
+            let proj: String
+            if let lan = allLanguages.filter({ Locale.current.identifier.hasPrefix($0) }).first {
+                proj = lan
+            } else {
+                proj = "Base"
+            }
+            guard let path = bundle.path(forResource: proj, ofType: "lproj") else {
+                return nil
+            }
+            return Bundle(path: path)
+        }
+        
+        func image(named: String) -> UIImage? {
+            return UIImage(named: named, in: bundle, compatibleWith: nil)
+        }
+        
+        func filePath(_ name: String) -> String? {
+            if let p = localBundle?.path(forResource: name, ofType: nil) {
+                return p
+            }
+            return bundle.path(forResource: name, ofType: nil)
+        }
+        
+        func string(_ str: String) -> String {
+            if let p = localBundle {
+                return p.localizedString(forKey: str, value: nil, table: nil)
+            }
+            return bundle.localizedString(forKey: str, value: nil, table: nil)
+        }
+        
+        func font(_ fontName: String, fontSize: CGFloat) -> UIFont {
+            guard let fnt = font?(fontName, fontSize) else {
+                return UIFont.systemFont(ofSize: fontSize)
+            }
+            return fnt
+        }
+    }
+    
+    var R: Resources {
+        guard let b = resBundle else { return Resources(bundle: .main, language: nil) }
+        return Resources(bundle: b, language: dataModel.language)
+    }
+    
+    fileprivate var resBundle: Bundle? {
         let clsName = String(describing: type(of: self))
         guard let start = clsName.firstIndex(of: "_") else { return nil }
         let paywallID = clsName[start ..< clsName.endIndex]
@@ -245,30 +318,5 @@ extension PWManager.PaywallView {
         }
         
         return Bundle(path: path)
-    }
-    
-    func filePath(name: String) -> String? {
-        return resBundle?.path(forResource: name, ofType: nil)
-    }
-    
-    func image(named name: String) -> UIImage? {
-        return UIImage(named: name, in: resBundle, compatibleWith: nil)
-    }
-    
-    func localString(_ string: String) -> String {
-        guard let moduleBundle = resBundle else { return string }
-        guard let language = dataModel.language,
-              let path = moduleBundle.path(forResource: language, ofType: "lproj"),
-              let specifyBundle = Bundle(path: path) else {
-            return NSLocalizedString(string, tableName: nil, bundle: moduleBundle, value: "", comment: "")
-        }
-        return NSLocalizedString(string, tableName: nil, bundle: specifyBundle, value: "", comment: "")
-    }
-    
-    func font(fontName: String, fontSize: CGFloat) -> UIFont {
-        guard let fnt = dataModel.fontConfig?(fontName, fontSize) else {
-            return UIFont.systemFont(ofSize: fontSize)
-        }
-        return fnt
     }
 }
