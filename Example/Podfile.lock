@@ -10,15 +10,11 @@ PODS:
   - PWManager/OOG104/sample002 (16.0.0):
     - Components (~> 0.1.0)
     - SnapKit
-  - PWManager/template (16.0.0):
-    - Components (~> 0.1.0)
-    - SnapKit
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - PWManager/normal (from `../`)
   - PWManager/OOG104 (from `../`)
-  - PWManager/template (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -35,6 +31,6 @@ SPEC CHECKSUMS:
   PWManager: 7e1b74448e9c4cbe9223e6d547970f7a6b9b3079
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 71d6fcf53ae590b5e8e87a9054a3580006e5e8c2
+PODFILE CHECKSUM: a615e3626aaf92b51196b0ff11dd25a20c6ff843
 
 COCOAPODS: 1.11.3
