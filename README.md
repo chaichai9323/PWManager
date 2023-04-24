@@ -17,7 +17,18 @@ PWManager is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'PWManager'
+if 集成Revenuecat就使用
+    pod 'PWManager', '~> 16.0.0'
+else
+    pod 'PWManager/normal', '~> 16.0.0'
+end
+
+比如需要使用OOG104工程的所有paywall
+pod 'PWManager/OOG104', '~> 16.0.0'
+
+如果只想使用OOG101工程的某一个paywall
+pod 'PWManager/OOG104/sample001', '~> 16.0.0'
+
 ```
 
 ## Author

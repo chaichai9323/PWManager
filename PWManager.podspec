@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PWManager'
-  s.version          = '12.0.0'
+  s.version          = '16.0.0'
   s.summary          = 'A short description of PWManager.'
 
 # This description is used to generate tags and improve search results.
@@ -58,23 +58,26 @@ TODO: Add long description of the pod here.
     view.dependency "Components", "~> 0.1.0"
   end
   
-#  s.subspec "OOG101" do | proj |
-#    subdir = proj.name.split("/")[1]
-#    Dir.entries("#{dir}/Assets/#{subdir}").each do | dirname |
-#      if dirname =~ /\A\w/
-#        proj.subspec dirname do | view |
-#          tmparr = view.name.split("/")
-#          paywallid = tmparr[tmparr.count - 1]
-#          view.source_files = "#{dir}/Classes/Paywalls/#{subdir}/*_#{paywallid}.swift"
-#          view.resource_bundles = {
-#            "#{s.name}_#{subdir}_#{paywallid}" => ["#{dir}/Assets/#{subdir}/#{paywallid}/*"]
-#          }
-#          view.dependency "SnapKit"
-#          view.dependency "Components", "~> 0.1.0"
-#        end
-#      end
-#    end
-#  end
-  
+  Dir.entries("#{dir}/Assets").each do | folder |
+    if folder =~ /\A\w/ and folder != "template"
+      s.subspec folder do | proj |
+        subdir = proj.name.split("/")[1]
+        Dir.entries("#{dir}/Assets/#{subdir}").each do | dirname |
+          if dirname =~ /\A\w/
+            proj.subspec dirname do | view |
+              tmparr = view.name.split("/")
+              paywallid = tmparr[tmparr.count - 1]
+              view.source_files = "#{dir}/Classes/Paywalls/#{subdir}/*_#{paywallid}.swift"
+              view.resource_bundles = {
+                "#{s.name}_#{subdir}_#{paywallid}" => ["#{dir}/Assets/#{subdir}/#{paywallid}/*"]
+              }
+              view.dependency "SnapKit"
+              view.dependency "Components", "~> 0.1.0"
+            end
+          end
+        end
+      end
+    end
+  end
   s.default_subspec = "rc"
 end

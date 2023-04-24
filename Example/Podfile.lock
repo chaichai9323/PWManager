@@ -1,13 +1,23 @@
 PODS:
   - Components (0.1.9.6)
-  - PWManager/normal (12.0.0)
-  - PWManager/template (12.0.0):
+  - PWManager/normal (16.0.0)
+  - PWManager/OOG104 (16.0.0):
+    - PWManager/OOG104/sample001 (= 16.0.0)
+    - PWManager/OOG104/sample002 (= 16.0.0)
+  - PWManager/OOG104/sample001 (16.0.0):
+    - Components (~> 0.1.0)
+    - SnapKit
+  - PWManager/OOG104/sample002 (16.0.0):
+    - Components (~> 0.1.0)
+    - SnapKit
+  - PWManager/template (16.0.0):
     - Components (~> 0.1.0)
     - SnapKit
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - PWManager/normal (from `../`)
+  - PWManager/OOG104 (from `../`)
   - PWManager/template (from `../`)
 
 SPEC REPOS:
@@ -22,9 +32,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Components: 078249ee839bbd2d72869049c007419c3114d023
-  PWManager: a46f2e1c7f3c7fe2f4e34aa19881cadf75773eb6
+  PWManager: 7e1b74448e9c4cbe9223e6d547970f7a6b9b3079
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: a32942e5f9aaf07b84f9aa186b6b11c8e51953f5
+PODFILE CHECKSUM: 71d6fcf53ae590b5e8e87a9054a3580006e5e8c2
 
 COCOAPODS: 1.11.3

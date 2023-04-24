@@ -10,9 +10,11 @@ import Foundation
 import SnapKit
 import Components
 extension PWManager {
-    public class Paywall_template: PaywallView {
+    public class OOG104_sample001: PaywallView {
         override public func setupUI() {
             super.setupUI()
+            backgroundColor = .white
+
 #if DEBUG
             backgroundColor = .white
             let btn = UIButton()
