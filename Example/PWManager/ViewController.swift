@@ -24,8 +24,8 @@ class ViewController: UIViewController {
 
     
     @IBAction func click() {
-        let p1 = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99)
-        let p2 = PWManager.ProductModel(productIdentifier: "com.sub.month", unit: .month, price: 9.99)
+        let p1 = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99, freeTrialDays: 7,priceSymbol: "$")
+        let p2 = PWManager.ProductModel(productIdentifier: "com.sub.month", unit: .month, price: 9.99, freeTrialDays: 7,priceSymbol: "$")
         
         PWManager.config(
             design: "x13",
@@ -33,11 +33,11 @@ class ViewController: UIViewController {
             source: "onboarding",
             ui: PWManager.OOG104_sample001.self
         )
-//        .switchLanguage(language: "de")
+        .switchLanguage(language: "de")
         .textFont{ name, size in
             return UIFont(name: name, size: size)
         }
-        .addExtraData("abc")
+        .addExtraData(["day": "2023-04-24", "data": "wtf"])
         .customAction{ obj in
             print(obj)
         }
