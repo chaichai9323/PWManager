@@ -68,7 +68,7 @@ TODO: Add long description of the pod here.
             imagename = File.basename(astname, ".imageset")
             content += "\t\tstatic var #{imagename}: UIImage? { UIImage(named: #function, in: Self.bundle.resBundle, compatibleWith: nil) }\n"
           end
-          content += "\t}\n}"
+          content += "\t}\n}\n"
           File.open("./#{dir}/Classes/Paywalls/#{proj}/#{paywall}/#{proj}_#{paywall}+Resource.swift", "w+") do |f| f.syswrite(content) end
         end
       end

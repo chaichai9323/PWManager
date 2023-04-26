@@ -302,7 +302,16 @@ extension PWManager.PaywallView {
             return bundle.path(forResource: name, ofType: nil)
         }
         
-        func string(_ str: String) -> String {
+        func string(_ str: String, keys: [String]? = nil, placeholder: String = "<p>") -> String {
+            let s = getLocalString(str)
+            guard let k = keys, k.count > 0 else {
+                return s
+            }
+            let res = s.replacingOccurrences(of: placeholder, with: "%@")
+            return String(format: res, arguments: k)
+        }
+        
+        private func getLocalString(_ str: String) -> String {
             if let p = localBundle {
                 return p.localizedString(forKey: str, value: nil, table: nil)
             }

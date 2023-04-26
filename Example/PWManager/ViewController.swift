@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         .switchLanguage(language: "de")
         .textFont{ name, size in
             ///比如可以在这里重定向字体
-            return UIFont(name: "Poppins-Bold", size: size)
+            return UIFont(name: name, size: size)
         }
         .addExtraData(["day": "2023-04-24", "data": "wtf"])
         .customAction{ obj in

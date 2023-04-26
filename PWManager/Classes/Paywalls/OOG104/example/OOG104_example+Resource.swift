@@ -5,7 +5,8 @@ extension PWManager.OOG104_example: PWManagerImageProtocol {
 	}
 	public struct Image: PWManagerImageDataType {
 		static var bundle: PWManager.PaywallView.Type = PWManager.OOG104_example.self
-		static var onboarding: UIImage? { UIImage(named: #function, in: Self.bundle.resBundle, compatibleWith: nil) }
+		static var OnboardingStar: UIImage? { UIImage(named: #function, in: Self.bundle.resBundle, compatibleWith: nil) }
+		static var onboarding_shen_bgImage: UIImage? { UIImage(named: #function, in: Self.bundle.resBundle, compatibleWith: nil) }
 		static var onboarding_paywall_close: UIImage? { UIImage(named: #function, in: Self.bundle.resBundle, compatibleWith: nil) }
 	}
 }
