@@ -41,7 +41,7 @@ PWManager.config(
     design: "x13",
     products: [p1, p2],
     source: "onboarding",
-    ui: PWManager.OOG104_sample001.self
+    ui: PWManager.OOG104_example.self
 )
 .switchLanguage(language: "de")
 .textFont{ name, size in
@@ -71,7 +71,7 @@ PWManager.config(
     design: "x13",
     products: [p1, p2],
     source: "onboarding",
-    ui: PWManager.OOG104_sample001.self
+    ui: PWManager.OOG104_example.self
 )
 .switchLanguage(language: "de")
 .textFont{ name, size in
@@ -92,8 +92,8 @@ PWManager.config(
 
 ## 开发Paywall的注意事项
 ```ruby
-【 所有的paywall需在本pod库完成，在需要使用paywall的项目中使用pod的方式集成。强烈推荐在本pod库中完成paywall的设计！！！ 】
- 1.获取图片资源方法: R.image(named: xx)
+【 所有的paywall需在本pod库完成，在需要使用paywall的项目中使用pod的方式集成。强烈推荐在本pod库中完成paywall的开发！！！ 】
+ 1.获取图片资源方法: R.image.xxx
  2.获取文本本地化方法: R.string(str)
  3.获取资源路径方法: R.filePath(file)
  4.获取字体的方法: R.font("Poppins-Regular", fontSize: 20)

@@ -73,7 +73,7 @@ public class PWManager {
         /// 是否需要动画
         fileprivate let animate: Bool
         ///语言环境 比如 [en, es-MX, nl, de]
-        fileprivate var language: String?
+        var language: String?
         ///字体设置
         private(set) var fontConfig: ((_ name: String, _ size: CGFloat) -> UIFont?)?
         ///预留附加信息
@@ -242,18 +242,27 @@ extension PWManager {
     }
 }
 
+protocol PWManagerImageDataType {
+    static var bundle: PWManager.PaywallView.Type { get }
+}
+protocol PWManagerImageProtocol {
+    associatedtype Image: PWManagerImageDataType
+}
+
 extension PWManager.PaywallView {
     
-    struct Resources {
+    struct Resources<T: PWManagerImageProtocol> {
         let bundle: Bundle
         let language: String?
         
+        var image: T.Image.Type
         private var font: ((_ name: String, _ size: CGFloat) -> UIFont?)?
         
         init(bundle: Bundle, language: String?, font: ((_: String, _: CGFloat) -> UIFont?)? = nil) {
             self.bundle = bundle
             self.language = language
             self.font = font
+            self.image = T.Image.self
         }
         
         private var allLanguages: [String] {
@@ -286,10 +295,6 @@ extension PWManager.PaywallView {
             return Bundle(path: path)
         }
         
-        func image(named: String) -> UIImage? {
-            return UIImage(named: named, in: bundle, compatibleWith: nil)
-        }
-        
         func filePath(_ name: String) -> String? {
             if let p = localBundle?.path(forResource: name, ofType: nil) {
                 return p
@@ -312,17 +317,13 @@ extension PWManager.PaywallView {
         }
     }
     
-    var R: Resources {
-        guard let b = resBundle else { return Resources(bundle: .main, language: nil) }
-        return Resources(bundle: b, language: dataModel.language, font: dataModel.fontConfig)
-    }
     
-    fileprivate var resBundle: Bundle? {
-        let clsName = String(describing: type(of: self))
+    static var resBundle: Bundle {
+        let clsName = String(describing: self)
         guard let path = Bundle.main.path(forResource: "PWManager_\(String(clsName))", ofType: "bundle") else {
-            return nil
+            return .main
         }
         
-        return Bundle(path: path)
+        return Bundle(path: path) ?? .main
     }
 }

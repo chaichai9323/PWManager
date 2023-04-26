@@ -37,11 +37,13 @@ done
 PAYWALL=${PAYWALL//[^[:alnum:]]/_}
 classname=$PROJECT"_"$PAYWALL
 cmds="s;Paywall_template;$classname;"
-swift="./PWManager/Classes/Paywalls/$PROJECT/$classname.swift"
-
-cat PWManager/Classes/Paywalls/Paywall_template.swift | sed $cmds > $swift
+swift="./PWManager/Classes/Paywalls/$PROJECT/$PAYWALL/$classname.swift"
 
 cp -rf PWManager/Assets/template PWManager/Assets/$PROJECT/$PAYWALL
+cp -rf PWManager/Classes/Paywalls/template PWManager/Classes/Paywalls/$PROJECT/$PAYWALL
+rm -f PWManager/Classes/Paywalls/$PROJECT/$PAYWALL/*.swift
+cat PWManager/Classes/Paywalls/template/Paywall_template.swift | sed $cmds > $swift
+
 
 echo "创建Paywall完成"
 

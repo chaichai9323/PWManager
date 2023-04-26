@@ -31,7 +31,7 @@ class ViewController: UIViewController {
             design: "x13",
             products: [p1, p2],
             source: "onboarding",
-            ui: PWManager.OOG104_sample001.self
+            ui: PWManager.OOG104_example.self
         )
         .switchLanguage(language: "de")
         .textFont{ name, size in

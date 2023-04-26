@@ -50,12 +50,29 @@ TODO: Add long description of the pod here.
   s.subspec "template" do | view |
     arr = view.name.split("/")
     paywallid = arr[arr.count - 1]
-    view.source_files = "#{dir}/Classes/Paywalls/*_#{paywallid}.swift"
+    view.source_files = "#{dir}/Classes/Paywalls/template/*_#{paywallid}.swift"
     view.resource_bundles = {
       "#{s.name}_#{paywallid}" => ["#{dir}/Assets/#{paywallid}/*"]
     }
     view.dependency "SnapKit"
     view.dependency "Components", "~> 0.1.0"
+  end
+  
+  Dir.entries("#{dir}/Assets").each do | proj |
+    if proj =~ /\A\w/ and proj != "template"
+      Dir.entries("#{dir}/Assets/#{proj}").each do | paywall |
+        cls = "PWManager.#{proj}_#{paywall}"
+        content = "import Foundation\nextension #{cls}: PWManagerImageProtocol {\n\tvar R: Resources<#{cls}> {\n\t\treturn Resources<#{cls}>(bundle: Self.resBundle, language: dataModel.language, font: dataModel.fontConfig)\n\t}\n\tpublic struct Image: PWManagerImageDataType {\n\t\tstatic var bundle: PWManager.PaywallView.Type = #{cls}.self\n"
+        if paywall =~ /\A\w/
+          Dir.glob("#{dir}/Assets/#{proj}/#{paywall}/Assets.xcassets/**/*.imageset").each do | astname |
+            imagename = File.basename(astname, ".imageset")
+            content += "\t\tstatic var #{imagename}: UIImage? { UIImage(named: #function, in: Self.bundle.resBundle, compatibleWith: nil) }\n"
+          end
+          content += "\t}\n}"
+          File.open("./#{dir}/Classes/Paywalls/#{proj}/#{paywall}/#{proj}_#{paywall}+Resource.swift", "w+") do |f| f.syswrite(content) end
+        end
+      end
+    end
   end
   
   Dir.entries("#{dir}/Assets").each do | folder |
@@ -67,7 +84,7 @@ TODO: Add long description of the pod here.
             proj.subspec dirname do | view |
               tmparr = view.name.split("/")
               paywallid = tmparr[tmparr.count - 1]
-              view.source_files = "#{dir}/Classes/Paywalls/#{subdir}/*_#{paywallid}.swift"
+              view.source_files = "#{dir}/Classes/Paywalls/#{subdir}/#{paywallid}/*.swift"
               view.resource_bundles = {
                 "#{s.name}_#{subdir}_#{paywallid}" => ["#{dir}/Assets/#{subdir}/#{paywallid}/*"]
               }
