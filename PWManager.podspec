@@ -39,11 +39,11 @@ TODO: Add long description of the pod here.
   end
   
   s.subspec "normal" do | normal |
-    normal.source_files = "#{dir}/Classes/Normal/**/*", "#{dir}/Classes/*.swift"
+    normal.source_files = "#{dir}/Classes/Normal/**/*", "#{dir}/Classes/*.swift", "#{dir}/Classes/UIComponents/*.swift"
   end
   
   s.subspec "rc" do | rc |
-    rc.source_files = "#{dir}/Classes/RC/**/*", "#{dir}/Classes/*.swift"
+    rc.source_files = "#{dir}/Classes/RC/**/*", "#{dir}/Classes/*.swift", "#{dir}/Classes/UIComponents/*.swift"
     rc.dependency 'IAPManager', '~> 11.0.19'
   end
   
