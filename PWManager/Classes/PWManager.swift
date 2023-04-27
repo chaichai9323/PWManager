@@ -171,7 +171,11 @@ extension PWManager {
         
         private lazy var loadingActivity: UIActivityIndicatorView = {
             let res = UIActivityIndicatorView()
+#if swift(>=4.2)
+            res.style = .large
+#else
             res.activityIndicatorViewStyle = .large
+#endif
             res.color = uiModel.loadingActivityColor
             res.translatesAutoresizingMaskIntoConstraints = false
             return res
