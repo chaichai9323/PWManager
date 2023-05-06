@@ -28,6 +28,7 @@ extension UIView {
             endPoint = end
             super.init(frame: .zero)
             layer.addSublayer(lay)
+            isUserInteractionEnabled = false
         }
         
         lazy var lay: CAGradientLayer = {

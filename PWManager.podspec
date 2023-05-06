@@ -42,9 +42,14 @@ TODO: Add long description of the pod here.
     normal.source_files = "#{dir}/Classes/Normal/**/*", "#{dir}/Classes/*.swift", "#{dir}/Classes/UIComponents/*.swift"
   end
   
-  s.subspec "rc" do | rc |
-    rc.source_files = "#{dir}/Classes/RC/**/*", "#{dir}/Classes/*.swift", "#{dir}/Classes/UIComponents/*.swift"
-    rc.dependency 'IAPManager', '~> 11.0.19'
+  s.subspec "iap-rc" do | iap |
+    iap.source_files = "#{dir}/Classes/RC/**/*", "#{dir}/Classes/*.swift", "#{dir}/Classes/UIComponents/*.swift"
+    iap.dependency 'IAPManager/rc', '~> 11.0.19'
+  end
+  
+  s.subspec "iap-all" do | iap |
+    iap.source_files = "#{dir}/Classes/RC/**/*", "#{dir}/Classes/*.swift", "#{dir}/Classes/UIComponents/*.swift"
+    iap.dependency 'IAPManager/all', '~> 11.0.19'
   end
   
   s.subspec "template" do | view |
@@ -96,5 +101,5 @@ TODO: Add long description of the pod here.
       end
     end
   end
-  s.default_subspec = "rc"
+  s.default_subspec = "normal"
 end

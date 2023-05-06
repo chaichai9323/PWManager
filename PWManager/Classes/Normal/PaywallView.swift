@@ -48,6 +48,7 @@ extension PWManager {
         
         ///购买操作，所有子类统一调用此方法进行购买不要自己实现
         public final func paywallActionBuy(product: PaywallModel.ProductType) {
+            guard let _ = myModel?.buyHandle else { return }
             self.vc?.loading = true
             myModel?.buyHandle?(product) { [weak self] suc in
                 self?.vc?.loading = false
@@ -60,6 +61,7 @@ extension PWManager {
         
         ///恢复操作，所有子类统一调用此方法进行购买，不要自己实现
         public final func paywallActionRestore() {
+            guard let _ = myModel?.restoreHandle else { return }
             self.vc?.loading = true
             myModel?.restoreHandle?{ [weak self] suc in
                 self?.vc?.loading = false

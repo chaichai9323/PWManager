@@ -17,11 +17,12 @@ PWManager is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-if 集成Revenuecat就使用
+#单纯集成paywall
     pod 'PWManager', '~> 16.0.0'
-else
-    pod 'PWManager/normal', '~> 16.0.0'
-end
+#集成了我们自己的IAPManager/rc
+    pod 'PWManager/iap-rc', '~> 16.0.0'
+#集成了IAPManager 或者 IAPManager/all（即使用了superwall）
+    pod 'PWManager/iap-all', '~> 16.0.0'
 
 比如需要使用OOG104工程的所有paywall
 pod 'PWManager/OOG104', '~> 16.0.0'
