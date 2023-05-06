@@ -4,7 +4,9 @@ import Components
 extension PWManager {
     public class OOG104_example: PaywallView {
         class ExamplePlan: BasePricePlanView {
+            let product: PWManager.PaywallModel.ProductType
             init(_ product: PWManager.PaywallModel.ProductType, _ R: PWManager.PaywallView.Resources<OOG104_example>) {
+                self.product = product
                 super.init(frame: .zero)
                 
                 priceLab.textAlignment = .left
@@ -217,7 +219,8 @@ extension PWManager {
         }
         /// 购买方法
         @objc func buy() {
-            paywallActionBuy(product: products[0])
+            guard let p = planViews.first(where: { $0.selected })?.product else { return }
+            paywallActionBuy(product: p)
         }
 
         /// 恢复购买方法
