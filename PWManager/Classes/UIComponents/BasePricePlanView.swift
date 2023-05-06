@@ -52,6 +52,8 @@ extension PWManager {
             return res
         }()
         
+        var priceGradientColor: (from: UIColor, to: UIColor)?
+        
         var selected: Bool = false {
             didSet {
                 shadowView.layer.shadow(
@@ -66,6 +68,9 @@ extension PWManager {
         
         override func layoutSubviews() {
             super.layoutSubviews()
+            if let c = priceGradientColor {
+                priceAveLab.gradientColor = c
+            }
             shadowView.layer.shadowPath = UIBezierPath(rect: shadowView.bounds).cgPath
         }
         
