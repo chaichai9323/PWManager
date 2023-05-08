@@ -10,23 +10,23 @@ extension PWManager {
                 super.init(frame: .zero)
                 
                 priceLab.textAlignment = .left
-                priceLab.font = R.font("Poppins-SemiBold", fontSize: cIpad(20, 15))
+                priceLab.font = R.font(poppins: .semiBold, fontSize: cIpad(20, 15))
                 priceLab.textColor = UIColor(hexString: "#323233")
                 
                 priceAveLab.textAlignment = .right
-                priceAveLab.font = R.font("Poppins-SemiBold", fontSize: cIpad(20, 15))
+                priceAveLab.font = R.font(poppins: .semiBold, fontSize: cIpad(20, 15))
                 priceAveLab.textColor = UIColor(hexString: "#323233")
                 
                 freeLab.textAlignment = .left
                 freeLab.textColor = UIColor(hexString: "#646466")
-                freeLab.font = R.font("Poppins-Medium", fontSize: cIpad(17, 13))
+                freeLab.font = R.font(poppins: .medium, fontSize: cIpad(17, 13))
                 
                 desLab.textAlignment = .right
                 desLab.textColor = UIColor(hexString: "#646466")
-                desLab.font = R.font("Poppins-Medium", fontSize: cIpad(14, 11))
+                desLab.font = R.font(poppins: .medium, fontSize: cIpad(14, 11))
                 
                 saveLayer.backgroundColor = UIColor(hexString: "E4277A")
-                saleLab.font = R.font("Poppins-Medium", fontSize: cX(11))
+                saleLab.font = R.font(poppins: .medium, fontSize: cX(11))
                 saleLab.text = "SAVE 70%"
                 saleLab.textColor = .white
                 
@@ -83,7 +83,7 @@ extension PWManager {
                 make.centerY.equalToSuperview()
             }
             
-            let lab = UILabel(frame: .zero, text: R.string("Secured with Apple Store"), textColor: .init("#646466"), font: R.font("Poppins-Regular", fontSize: cIpad(17, 13)), textAligment: .left)
+            let lab = UILabel(frame: .zero, text: R.string("Secured with Apple Store"), textColor: .init("#646466"), font: R.font(poppins: .regular, fontSize: cIpad(17, 13)), textAligment: .left)
             res.addSubview(lab)
             lab.snp.makeConstraints { make in
                 make.left.equalToSuperview().offset(cIpad(56, 40))
@@ -118,7 +118,7 @@ extension PWManager {
                         make.right.equalToSuperview()
                     }
                 }
-                let lab = UILabel(frame: .zero, text: R.string("Week") + " \(1 + 11 * i)", textColor: .white, font: R.font("Poppins-Medium", fontSize: cIpad(17, 13)))
+                let lab = UILabel(frame: .zero, text: R.string("Week") + " \(1 + 11 * i)", textColor: .white, font: R.font(poppins: .medium, fontSize: cIpad(17, 13)))
                 tmpView.addSubview(lab)
                 lab.snp.makeConstraints { make in
                     make.bottom.equalToSuperview().offset(-cIpad(5, 4))
@@ -139,7 +139,7 @@ extension PWManager {
                 make.width.height.equalTo(44)
             }
             
-            let limitedLB = UILabel(frame: .zero, text: R.string("Join thousands of happy users"), textColor: UIColor(hexString: "323233"), font: R.font("Poppins-SemiBold", fontSize: cIpad(23, 20)), textAligment: .center)
+            let limitedLB = UILabel(frame: .zero, text: R.string("Join thousands of happy users"), textColor: UIColor(hexString: "323233"), font: R.font(poppins: .semiBold, fontSize: cIpad(23, 20)), textAligment: .center)
             addSubview(limitedLB)
             limitedLB.snp.makeConstraints { make in
                 make.left.right.equalToSuperview().inset(cX(16))
