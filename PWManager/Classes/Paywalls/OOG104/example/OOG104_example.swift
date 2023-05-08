@@ -107,17 +107,28 @@ extension PWManager {
             }
             
             for i in 0 ..< 2 {
-                let lab = UILabel(frame: .zero, text: R.string("Week") + " \(1 + 11 * i)", textColor: .white, font: R.font("Poppins-Medium", fontSize: cIpad(17, 13)))
-                lab.backgroundColor = UIColor(hexString: "#000000", alpha: 0.15)
-                bgImageView.addSubview(lab)
-                lab.snp.makeConstraints { make in
+                let tmpView = UIView()
+                tmpView.backgroundColor = UIColor(hexString: "#000000", alpha: 0.15)
+                bgImageView.addSubview(tmpView)
+                tmpView.snp.makeConstraints { make in
                     make.bottom.equalToSuperview()
                     if i == 0 {
-                        make.left.equalToSuperview().offset(cIpad(13, 10))
+                        make.left.equalToSuperview()
                     } else {
-                        make.right.equalToSuperview().offset(-cIpad(13, 10))
+                        make.right.equalToSuperview()
                     }
                 }
+                let lab = UILabel(frame: .zero, text: R.string("Week") + " \(1 + 11 * i)", textColor: .white, font: R.font("Poppins-Medium", fontSize: cIpad(17, 13)))
+                tmpView.addSubview(lab)
+                lab.snp.makeConstraints { make in
+                    make.bottom.equalToSuperview().offset(-cIpad(5, 4))
+                    make.top.equalToSuperview().offset(cIpad(5, 4))
+                    make.left.equalToSuperview().offset(cIpad(13, 10))
+                    make.right.equalToSuperview().offset(-cIpad(13, 10))
+                }
+                tmpView.layoutIfNeeded()
+                tmpView.layer.cornerRadius = 16
+                tmpView.layer.maskedCorners = [i == 0 ? .layerMaxXMinYCorner : .layerMinXMinYCorner]
             }
             
             let closeBtn = UIButton(image: R.image.onboarding_paywall_close, target: self, action: #selector(close))
