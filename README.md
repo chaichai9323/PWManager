@@ -95,9 +95,14 @@ PWManager.config(
 ```ruby
 【 所有的paywall需在本pod库完成，在需要使用paywall的项目中使用pod的方式集成。强烈推荐在本pod库中完成paywall的开发！！！ 】
  1.获取图片资源方法: R.image.xxx
- 2.获取文本本地化方法: R.string(str)
+ 2.获取文本本地化方法: 
+    1.R.string(str)
+    2.R.string(str, keys: ["a","b"])
  3.获取资源路径方法: R.filePath(file)
- 4.获取字体的方法: R.font("Poppins-Regular", fontSize: 20)
+ 4.获取字体的方法: 
+    1.R.font("Poppins-Regular", fontSize: 20)
+    2.R.font(poppins: .medium, fontSize: 20))
+    3.R.font(din: .bold, fontSize: 20))
  5.获取产品列表方法: self.products
 ```
 ## Author

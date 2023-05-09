@@ -1,5 +1,5 @@
 PODS:
-  - Components (0.1.9.6)
+  - Components (0.1.9.7)
   - PWManager/normal (16.0.0)
   - PWManager/OOG104 (16.0.0):
     - PWManager/OOG104/example (= 16.0.0)
@@ -23,10 +23,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Components: 078249ee839bbd2d72869049c007419c3114d023
-  PWManager: 32f41310005393569e80756db941db51d5ed18cb
+  Components: 48f74840b10202b0fc66a35a170a7872976e7367
+  PWManager: ec802f1c6ce3eae2a6338970fb3b58a6b676f223
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: bee6155d408d397448d2359f83b99e95432ce780
+PODFILE CHECKSUM: 9c5b74e5c6d17ff61f2cf14052a7cc2c904f625d
 
 COCOAPODS: 1.11.3
