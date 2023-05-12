@@ -99,10 +99,7 @@ PWManager.config(
     1.R.string(str)
     2.R.string(str, keys: ["a","b"])
  3.获取资源路径方法: R.filePath(file)
- 4.获取字体的方法: 
-    1.R.font("Poppins-Regular", fontSize: 20)
-    2.R.font(poppins: .medium, fontSize: 20))
-    3.R.font(din: .bold, fontSize: 20))
+ 4.获取字体的方法: R.font("Poppins-Regular", fontSize: 20)
  5.获取产品列表方法: self.products
 ```
 ## Author
