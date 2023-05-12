@@ -324,7 +324,11 @@ extension PWManager.PaywallView {
         
         func font(_ fontName: String, fontSize: CGFloat) -> UIFont {
             guard let fnt = font?(fontName, fontSize) else {
-                return UIFont.systemFont(ofSize: fontSize)
+                if let res = UIFont(name: fontName, size: fontSize) {
+                    return res
+                } else {
+                    return .systemFont(ofSize: fontSize)
+                }
             }
             return fnt
         }
