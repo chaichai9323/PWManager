@@ -4,50 +4,19 @@ import Components
 extension PWManager {
     public class OOG104_example: PaywallView {
         class ExamplePlan: BasePricePlanView {
-            let product: PWManager.PaywallModel.ProductType
-            init(_ product: PWManager.PaywallModel.ProductType, _ R: PWManager.PaywallView.Resources<OOG104_example>) {
-                self.product = product
-                super.init(frame: .zero)
+            init(_ product: PWManager.PaywallModel.ProductType, _ R: PWManager.PaywallView.Resources<PWManager.OOG104_example>)  {
+                super.init(product, R)
                 
-                priceLab.textAlignment = .left
-                priceLab.font = R.font("Poppins-SemiBold", fontSize: cIpad(20, 15))
-                priceLab.textColor = UIColor(hexString: "#323233")
-                
-                priceAveLab.textAlignment = .right
-                priceAveLab.font = R.font("Poppins-SemiBold", fontSize: cIpad(20, 15))
-                priceAveLab.textColor = UIColor(hexString: "#323233")
-                
-                freeLab.textAlignment = .left
-                freeLab.textColor = UIColor(hexString: "#646466")
-                freeLab.font = R.font("Poppins-Medium", fontSize: cIpad(17, 13))
-                
-                desLab.textAlignment = .right
-                desLab.textColor = UIColor(hexString: "#646466")
-                desLab.font = R.font("Poppins-Medium", fontSize: cIpad(14, 11))
-                
-                saveLayer.backgroundColor = UIColor(hexString: "E4277A")
-                saleLab.font = R.font("Poppins-Medium", fontSize: cX(11))
-                saleLab.text = "SAVE 70%"
-                saleLab.textColor = .white
-                
-                let num: Double
-                switch product.unit {
-                case .year:
-                    priceLab.text = "Annually-\(product.priceSymbol)\(product.price)/year"
-                    num = 53.0
-                case .month:
-                    priceLab.text = "Monthly-\(product.priceSymbol)\(product.price)/month"
-                    num = 4.0
-                case .quarter:
-                    priceLab.text = "Quarterly-\(product.priceSymbol)\(product.price)/3months"
-                    num = 13.0
-                case .week:
-                    priceLab.text = "Weekly-\(product.priceSymbol)\(product.price)/week"
-                    num = 1.0
+                ///边框颜色图片
+                borderView.image = R.image.subscription_shen_rect
+                if product.unit == .year {
+                    saveLayer.isHidden = false
+                    priceGradientColor = (UIColor(hexString: "#FF1850"), UIColor(hexString: "#8A53FF"))
+                    selected = true
+                } else {
+                    saveLayer.isHidden = true
+                    selected = false
                 }
-                priceAveLab.text = String(format: "\(product.priceSymbol)%.2f", product.price / num)
-                freeLab.text = R.string("<p>-Day Free Trial", keys: ["\(product.freeTrialDays)"])
-                desLab.text = R.string("per week")
             }
             
             required init?(coder: NSCoder) {
@@ -191,8 +160,6 @@ extension PWManager {
             var topView: UIView = starView
             for (i, model) in products.enumerated() {
                 let v = ExamplePlan(model,R)
-                v.borderView.image = R.image.subscription_shen_rect
-                v.saveLayer.isHidden = i != 0
                 addSubview(v)
                 v.snp.makeConstraints { make in
                     make.left.equalTo(cIpad(32, 16))
@@ -204,15 +171,6 @@ extension PWManager {
                         make.top.equalTo(topView.snp.bottom).offset(cIpad(21, 16))
                     }
                     topView = v
-                }
-                if model.unit == .year {
-                    v.selected = true
-                    v.priceGradientColor = (
-                        UIColor(hexString: "#FF1850"),
-                        UIColor(hexString: "#8A53FF")
-                    )
-                } else {
-                    v.selected = false
                 }
                 let tap = UITapGestureRecognizer(target: self, action: #selector(selectPlan(_:)))
                 v.addGestureRecognizer(tap)
