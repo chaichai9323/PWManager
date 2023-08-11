@@ -17,26 +17,30 @@ PWManager is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
+    pod 'PWManager', :subspecs => [
+    'normal' or 'iap-rc'' or 'iap-all',
+    'OOG104/example' or 'OOG104'
+    ]
+    ,:git => 'git@github.com:chaichai9323/PWManager.git'
+    
 #单纯集成paywall
-    pod 'PWManager', '~> 16.0.0'
+    'normal'
 #集成了我们自己的IAPManager/rc
-    pod 'PWManager/iap-rc', '~> 16.0.0'
-#集成了IAPManager 或者 IAPManager/all（即使用了superwall）
-    pod 'PWManager/iap-all', '~> 16.0.0'
-
-比如需要使用OOG104工程的所有paywall
-pod 'PWManager/OOG104', '~> 16.0.0'
-
-如果只想使用OOG104工程的某一个paywall
-pod 'PWManager/OOG104/sample001', '~> 16.0.0'
+    'iap-rc'
+#集成了IAPManager 或者 IAPManager/all（就是使用了superwall）
+    'iap-all'
+#比如需要使用OOG104工程的所有paywall
+    'OOG104'
+#如果只想使用OOG104工程的某一个paywall
+    'OOG104/example'
 
 
 ```
 ## 使用方法
 ```ruby
 在需要展示paywall的地方调用以下方法：
-let p1 = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99, freeTrialDays: 7,priceSymbol: "$")
-let p2 = PWManager.ProductModel(productIdentifier: "com.sub.month", unit: .month, price: 9.99, freeTrialDays: 7,priceSymbol: "$")
+let p1 = PWManager.ProductModel(productIdentifier: "com.sub.year", unit: .year, price: 35.99, freeTrialDays: 7)
+let p2 = PWManager.ProductModel(productIdentifier: "com.sub.month", unit: .month, price: 9.99, freeTrialDays: 0,priceCode: "USD", priceSymbol: "$")
         
 PWManager.config(
     design: "x13",

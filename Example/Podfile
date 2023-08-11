@@ -6,6 +6,11 @@ use_frameworks!
 platform :ios, '13.0'
 
 target 'PWManager_Example' do
+#  pod 'PWManager', :subspecs => [
+#  'normal',
+#  'OOG104/example']
+#  ,:git => 'git@github.com:chaichai9323/PWManager.git'
+  
   pod 'PWManager/normal', :path => '../'
   pod 'PWManager/OOG104', :path => '../'
   
