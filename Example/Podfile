@@ -3,8 +3,6 @@ source "https://github.com/CocoaPods/Specs.git"
 
 use_frameworks!
 
-ENV['PWManager_LocalPath'] = 'true'
-
 platform :ios, '13.0'
 
 target 'PWManager_Example' do

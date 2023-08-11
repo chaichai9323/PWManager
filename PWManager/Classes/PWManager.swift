@@ -32,6 +32,8 @@ public class PWManager {
         let price: Double
         ///价格符号
         let priceSymbol: String
+        ///货币代码 USD, CNY ...
+        let priceCode: String
         ///免费天数
         let freeTrialDays: Int
         ///附加数据可以供外部捕获传入的元数据
@@ -45,11 +47,12 @@ public class PWManager {
         ///   - price: 价格, 比如 35.99等等
         ///   - freeTrialDays: 免费使用的天数
         ///   - priceSymbol: 货币符号,比如 $,￥...
-        public init(productIdentifier: String, unit: Period, price: Double, freeTrialDays: Int = 7, priceSymbol: String = "$") {
+        public init(productIdentifier: String, unit: Period, price: Double, freeTrialDays: Int = 7, priceCode: String = "USD", priceSymbol: String = "$") {
             self.productIdentifier = productIdentifier
             self.unit = unit
             self.price = price
             self.freeTrialDays = freeTrialDays
+            self.priceCode = priceCode
             self.priceSymbol = priceSymbol
         }
     }

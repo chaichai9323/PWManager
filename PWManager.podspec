@@ -31,12 +31,7 @@ TODO: Add long description of the pod here.
   s.static_framework = true
   s.ios.deployment_target = '13.0'
 
-  dir = ''
-  if ENV['PWManager_LocalPath'] == 'true'
-    dir = 'PWManager'
-  else
-    dir = 'PWManager/PWManager'
-  end
+  dir = 'PWManager'
   
   s.subspec "normal" do | normal |
     normal.source_files = "#{dir}/Classes/Normal/**/*", "#{dir}/Classes/*.swift", "#{dir}/Classes/UIComponents/*.swift"

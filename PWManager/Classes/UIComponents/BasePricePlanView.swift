@@ -115,7 +115,11 @@ extension PWManager {
                 num = 1.0
             }
             priceAveLab.text = String(format: "\(product.priceSymbol)%.2f", product.price / num)
-            freeLab.text = R.string("<p>-Day Free Trial", keys: ["\(product.freeTrialDays)"])
+            if product.freeTrialDays > 0 {
+                freeLab.text = R.string("<p>-Day Free Trial", keys: ["\(product.freeTrialDays)"])
+            } else {
+                freeLab.text = ""
+            }
             desLab.text = R.string("per week")
         }
         
